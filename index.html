@@ -533,7 +533,7 @@ function mapBubbles(sel,sc,act,rp){
  return [...PLANTS].sort((a,b)=>b.mwp-a.mwp).map(p=>{const [px,py]=MAP.plants[p.id];const r=rp*Math.sqrt(p.mwp)/sc;return `<circle class="bubble ${on.has(p.id)?'':'off'} ${S.plant===p.id?'sel':''}" cx="${px}" cy="${py}" r="${r.toFixed(1)}" data-act="${act}" data-v="${p.id}" data-plant="${p.id}"/>`;}).join('');
 }
 function sizeLegend(rp){
- const vs=[2,4,6],rs=vs.map(v=>rp*Math.sqrt(v)),H=Math.ceil(rs[2]*2+18);let x=4,g='';
+ const vs=[2,6,10],rs=vs.map(v=>rp*Math.sqrt(v)),H=Math.ceil(rs[2]*2+18);let x=4,g='';
  vs.forEach((v,i)=>{const r=rs[i];const cx=x+r;g+=`<circle cx="${cx}" cy="${H-16-r}" r="${r}" class="lgb"/><text x="${cx}" y="${H-2}" text-anchor="middle" font-size="11.5" fill="#444">${v}</text>`;x+=r*2+12;});
  return `<svg width="${Math.ceil(x)}" height="${H}" viewBox="0 0 ${Math.ceil(x)} ${H}">${g}</svg>`;
 }
@@ -545,7 +545,7 @@ function mapBlock(sel){
  const mw=MAP.w,mh=MAP.h,H=430,sc=H/mh,W=mw*sc,ox=(440-W)/2,oy=14;
  let out=card(61,102,440,520);
  out+=`<svg class="abs mapsvg" style="left:${61+ox}px;top:${102+oy}px;overflow:visible" width="${W}" height="${H}" viewBox="0 0 ${mw} ${mh}">${mapDefs()}${mapPaths()}${mapBubbles(sel,sc,'plantsel',BR)}</svg>`;
- out+=`<div class="abs" style="left:78px;top:${102+520-96}px"><div style="font-size:12.5px;font-weight:700;color:#444;margin-bottom:2px">Potenza nominale impianto [MWp]</div>${sizeLegend(BR)}</div>`;
+ out+=`<div class="abs" style="left:78px;top:${102+520-112}px"><div style="font-size:12.5px;font-weight:700;color:#444;margin-bottom:2px">Potenza nominale [MWp]</div>${sizeLegend(BR)}</div>`;
  return out;
 }
 
